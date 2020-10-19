@@ -19,7 +19,7 @@
     let transactions = dummyTransactions;
 
     //add Transaction to DOM
-    function addTranscationDOM(transcation) {
+    function addTranscationDOM(transaction) {
         //getSign
         const sign = transaction.amount < 0 ? '-': '+';
 
@@ -31,10 +31,21 @@
 
         item.innerHTML = `
         ${transaction.text} <span>${sign}${Math.abs(transaction.amount)}
-        </span> <button> class="delete-btn">X</button>
+        </span> <button class="delete-btn">X</button>
         `;
 
-        
+        list.appendChild(item);
     }
+
+    init()
+
+    //Init App
+    function init(){
+        list.innerHTML = '';
+        transactions.forEach(addTranscationDOM);
+    }
+
+
+
 
 })()
