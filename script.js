@@ -37,6 +37,31 @@
         list.appendChild(item);
     }
 
+    //Add a Transaction
+    function addTranscation(e){
+        if(text.value.trim() === '' || amount.value.trim() === ''){
+            alert('Please enter a Transcation and Amount');
+        } else {
+            const transaction = {
+                id: generateID,
+                text: text.value,
+                amount: +amount.value
+            };
+
+            transactions.push(transaction)
+            addTranscationDOM(transaction);
+            updateValues();
+            text.value = '';
+            amount.value = '';
+        }
+
+
+        e.preventDefault();
+    }
+
+    function generateID(){
+        return Math.floor(Math.random() * 1000000000)
+    }
 
     //Init App
     init()
@@ -56,15 +81,17 @@
                         .reduce((acc, item) => (acc += item), 0)
                         .toFixed(2);
 
-                        console.log(income)
-
         const expense = (amounts
                          .filter(item => item < 0)
                          .reduce((acc, item) => (acc += item), 0) * -1)
-                         .toFixed(2)
+                         .toFixed(2);
+
+        balance.innerHTML = ` £ ${total}`;
+        money_plus.innerHTML = ` ${income}`;
+        money_minus.innerHTML = ` ${expense}`;
     }
 
-
+    form.addEventListener('submit', addTranscation);
 
 
 })()
